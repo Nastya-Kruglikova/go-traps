@@ -14,6 +14,16 @@ func First(query string, replicas ...Search) Result {
 }
 ```
 
+2. Goroutines in loop
+```
+for _, val := range values {
+	go func() {
+		fmt.Println(val)
+	}()
+}
+```
+
+
 https://play.golang.org/p/zNhoch6lbUE - math
 
 https://play.golang.org/p/IhKZsllW9fl - maps
