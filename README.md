@@ -23,6 +23,21 @@ for _, val := range values {
 }
 ```
 
+3. Mutex
+```
+func doSomething(){
+    for {
+        mu.Lock()
+        defer mu.Unlock()
+         
+        // some interesting code
+        // <-- the defer is not executed here as one *may* think
+     }
+   // <-- it is executed here when the function exits 
+}
+// Therefore the above code will Deadlock!
+```
+
 
 https://play.golang.org/p/zNhoch6lbUE - math
 
