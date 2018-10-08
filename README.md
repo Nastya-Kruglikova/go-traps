@@ -38,6 +38,25 @@ func doSomething(){
 // Therefore the above code will Deadlock!
 ```
 
+4. Mutex 2
+
+```
+func (ds *DataStore) get(key string) string {
+ ds.Lock()
+ defer ds.Unlock()
+ if ds.count() > 0 { <-- count() also takes a lock!
+  item := ds.cache[key]
+  return item
+ }
+ return “”
+}
+func (ds *DataStore) count() int {
+ ds.Lock() <-- deadlock
+ defer ds.Unlock()
+ return len(ds.cache)
+}
+```
+
 
 https://play.golang.org/p/zNhoch6lbUE - math
 
