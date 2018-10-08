@@ -1,5 +1,18 @@
 # go-traps
 
+Concurrency 
+
+1. Goroutines leak
+```
+func First(query string, replicas ...Search) Result {  
+    c := make(chan Result)
+    searchReplica := func(i int) { c <- replicas[i](query) }
+    for i := range replicas {
+        go searchReplica(i)
+    }
+    return <-c
+}
+```
 
 https://play.golang.org/p/zNhoch6lbUE - math
 
