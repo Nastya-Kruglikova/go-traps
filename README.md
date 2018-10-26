@@ -1,6 +1,40 @@
-# go-traps
+# Databse
 
-Concurrency 
+1. Defer in the loop
+```
+for rows.Next() {
+
+   fields, err := db.Query(.....)
+   if err != nil {
+      // ...
+   }
+   defer fields.Close()
+
+   // do something with `fields`
+
+}
+```
+
+2. NULL values
+
+3. prepared statements can lead to a lot of extra database activity
+
+4. not checking errors of rows.Next()
+
+```
+for rows.Next() {
+    // ...
+}
+if err = rows.Err(); err != nil {
+    // handle the error here
+}
+```
+
+5. Using Query() for a statement that doesn't return rows will reserve a connection from the pool.
+
+
+
+# Concurrency 
 
 1. Goroutines leak
 ```
@@ -57,6 +91,7 @@ func (ds *DataStore) count() int {
 }
 ```
 
+# Other
 
 https://play.golang.org/p/zNhoch6lbUE - math
 
